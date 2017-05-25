@@ -1,6 +1,7 @@
 <apex:page standardController="Account" >    
    
     <apex:sectionHeader title="{!$ObjectType.Account.label}" subtitle="{!Account.name}"/>
+	<apex:message/>
 	<apex:form >
         <apex:pageBlock title="Edit Account" mode="edit">                  
             <apex:pageBlockButtons >
