@@ -1,0 +1,10 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<!--c:createComponent-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <p><ui:button class="slds-button slds-button--brand uiButton forceCommunityAskCommunity" label="Other Component" press="{!c.OtherComponent	}" /></p>
+
+    <p>Dynamically created button</p>
+    {!v.body}
+
+</aura:component>

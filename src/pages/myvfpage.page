@@ -1,0 +1,19 @@
+<apex:page showHeader="false" showQuickActionVfHeader="false" controller="recaptchaController">
+    
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+        
+<script>
+	function changerecaptcha(){
+        var lexOrigin = "https://comunidade1-developer-edition.na35.force.com/marca1/s/";
+    	var response = document.getElementById("g-recaptcha-response").value;   
+        document.getElementById("message").value = response;
+        var message = response;
+    	parent.postMessage(message, lexOrigin);    
+	}       
+</script>
+    
+<div class="g-recaptcha" data-callback='changerecaptcha' data-sitekey="6Lf-bRsUAAAAACPA-yFoPI_NtCNKVFS7-G8hIkYq"></div> 
+<input type="hidden" id="message" />
+       
+</apex:page>

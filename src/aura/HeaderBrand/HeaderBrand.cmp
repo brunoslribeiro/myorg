@@ -1,0 +1,7 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+     
+     <ltng:require styles="{!join(',', $Resource.libraryfrontend + '/bootstrap.css')}" scripts="{!join(',',$Resource.libraryfrontend + '/jquery.js',$Resource.libraryfrontend + '/bootstrap.js')}"/>    
+    
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	 
+</aura:component>

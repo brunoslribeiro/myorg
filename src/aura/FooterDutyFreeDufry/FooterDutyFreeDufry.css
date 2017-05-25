@@ -1,0 +1,23 @@
+.THIS {
+    width:100%;
+    height: auto;
+    background-color:black;
+    color:white;
+}
+
+.THIS .footer{
+	width: 100%;
+    background-color:red;
+}
+
+.THIS .coluna {
+    width:30%;
+    position:relative;
+    float:left;
+    
+}
+
+.THIS .ullinkcoluna li{
+    font-size: 10px;
+    margin: 0; padding: 0;
+}

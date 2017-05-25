@@ -1,0 +1,131 @@
+<apex:page controller="AccountRemote">
+	
+    <!--JavaScript-->
+    <script language="javascript" src="{!URLFOR($Resource.libraryfrontend,'angular.js')}"/>
+    <script language="javascript" src="{!URLFOR($Resource.libraryfrontend,'jquery.js')}"/>
+        
+    <script language="javascript" src="{!URLFOR($Resource.libraryfrontend,'jquery.js')}"/>
+    <link type="text/css" href="{!URLFOR($Resource.libraryfrontend,'bootstrap.css')}" />
+    
+   <!-- Latest compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="{!URLFOR($Resource.libraryfrontend,'bootstrap.css')}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+        
+    <script language="javascript" type="text/javascript">
+         var app = angular.module('myApp', []);
+                   
+          app.controller('myCtrl', 
+                ['$scope', 'GetAccountsService','GetAccountSearchService', 
+                function($scope, GetAccountsService,GetAccountSearchService) {
+                
+                    $scope.contas = '';
+                    $scope.pNomeConta='';
+                    
+                    $scope.GetAccounts = function(){   
+                        GetAccountsService().then(
+                            function(result) {$scope.contas = result;},
+                            function(error)  {$scope.contas = null}
+                        );
+                    };
+              	
+              		$scope.GetAccountSearch = function(){
+                    
+                        console.log('Fui chamado');
+                        
+                        GetAccountSearchService($scope.pNomeConta).then(
+                            function(result) {$scope.contas = result;},
+                            function(error)  {$scope.contas = null}
+                        );
+                	};
+          }]);
+    
+        app.factory('GetAccountsService', ['$q', '$rootScope', function($q, $rootScope) {
+     
+            return function() {
+                var deferred = $q.defer();
+     
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.AccountRemote.getAccounts}',
+                    function(result, event) {
+                        $rootScope.$apply(function() {
+                          if (event.status) {
+                            deferred.resolve(result);
+                          } else {
+                            deferred.reject(event);
+                          }
+                        })
+                    },
+                    { buffer: true, escape: true, timeout: 30000 }
+                );
+     
+                return deferred.promise;
+            }
+     
+        }]);
+       
+    	app.factory('GetAccountSearchService', ['$q', '$rootScope', function($q, $rootScope) {
+     
+            return function(pNomeConta) {
+                var deferred = $q.defer();
+                
+                console.log(pNomeConta);
+           
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.AccountRemote.getAccountSearch}',pNomeConta,
+                    function(result, event) {
+                        $rootScope.$apply(function() {
+                          if (event.status) {
+                            deferred.resolve(result);
+                            console.log(result);
+                          } else {
+                            deferred.reject(event);
+                          }
+                        })
+                    },
+                    { buffer: true, escape: true, timeout: 30000 }
+                );
+     
+                return deferred.promise;
+            }
+     
+        }]);
+        
+    </script>
+    <apex:messages />
+ 
+    <div class="container-fluid" ng-app="myApp" ng-controller="myCtrl" style="min-width:800px;" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>{!$Label.SearchAccount}</strong>
+            </div>
+            <div class="panel-body">
+                <label for="pNomeConta" >{!$Label.NameAccount}</label>	
+                <input type="text" id="pNomeConta" ng-model="pNomeConta"/>
+                <button type="button" class="btn btn-default" ng-click="GetAccountSearch()">
+                    {!$Label.SearchAccount}
+                </button>
+            </div>
+        </div>
+        
+        <div>
+            <table ng-init="GetAccounts()" class="table table-striped">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Phone</td>
+                </tr>
+                <tr ng-repeat="conta in contas" >
+                    <td>{{conta.Id}}</td>
+                    <td>{{conta.Name}}</td>
+                    <td>{{conta.Phone}}</td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+       
+    
+   
+    
+</apex:page>

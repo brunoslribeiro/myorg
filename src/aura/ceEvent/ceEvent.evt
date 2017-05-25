@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+     <!--c:ceEvent-->
+     <aura:attribute name="message" type="String"/>
+</aura:event>

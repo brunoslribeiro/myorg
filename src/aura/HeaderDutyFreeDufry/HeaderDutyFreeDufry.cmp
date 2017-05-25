@@ -1,0 +1,67 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="HeaderDutyFreeDufryCtrl" >
+	    
+    <ltng:require styles="{!join(',', $Resource.libraryfrontend + '/bootstrap.css')}" scripts="{!join(',',$Resource.libraryfrontend + '/jquery.js',$Resource.libraryfrontend + '/bootstrap.js')}"/>    
+   		
+      <aura:attribute name="setMeOnInit" type="String" default="default value" />
+      <aura:attribute name="TitleModal" type="String" default="Title" />
+      <aura:attribute name="ListBrand" type="List"/>
+      <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+      <div class="container header">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-2">
+                <div style="float:left;margin-right:40px;">
+                    <img src="http://cdn2.dutyfreedufry.com.br/media/logo/default/logo_dufry.png" class="img-responsive imglogo float:left;" alt="Duty Free Dufry img-reponsive" width="240" height="45"/>				
+                </div>
+            </div>
+            <div class="menu col-md-4 col-md-offset-3 pull-right" >																					 
+          		                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#contry">
+                   <span class="translation">btncountry</span>
+                </button>
+                
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-md dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Brand 
+                    </button>
+                    <ul class="dropdown-menu" >
+                        <aura:iteration items="{!v.ListBrand}" var="Brand">
+                            <li><a href="#" onclick="{!c.CallBrandLink}" id="{!Brand.key}">{!Brand.value}</a></li>
+                        </aura:iteration>		  
+                    </ul>
+                </div>
+			
+            </div>	
+        </div>
+        <div class="row" style="margin-top:50px;margin-left:10px;">
+        	<div class="col-md-3 col-md-offset-2">
+                <ui:button label="Traduzir" press="{!c.translate}"/>
+            	<a href="#link1"><span class="translation">primeiroitem</span></a>&nbsp;
+                <a href="#link1"><span class="translation">primeiroitem</span></a>&nbsp;
+                <a href="#link1"><span class="translation">primeiroitem</span></a>&nbsp;
+                <a href="#link1"><span class="translation">primeiroitem</span></a>&nbsp; 
+            </div>
+        </div>
+    </div>	
+     
+    <div class="modal" id="contry" tabindex="1" role="dialog" aria-labelledby="Contry" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{!v.TitleModal}</h4>
+                </div>
+                <div class="modal-body">
+                    aaaaa
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</aura:component>

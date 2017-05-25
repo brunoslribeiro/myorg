@@ -1,0 +1,4 @@
+<aura:application >
+	 <aura:attribute name="message" type="String"/>
+     <p><ui:outputText value="{!'Hello! ' + v.message}"/></p>	
+</aura:application>

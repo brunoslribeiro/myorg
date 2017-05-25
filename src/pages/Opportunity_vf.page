@@ -1,0 +1,32 @@
+<apex:page standardController="Opportunity" extensions="Opportunity_Ctrl" tabStyle="Opportunity" >
+	
+    <apex:form id="Opportunityform">
+        <apex:pageBlock title="Informações da Oportunidade" mode="edit">
+            	<apex:messages styleClass="errorMsg"/>
+            
+            	<apex:pageBlockButtons >
+                     <!-- Botões Opportunityform -->
+                     <apex:commandButton action="{!save}" value="Save" id="Opportunityform_SaveButton"/>
+                     <apex:commandButton action="{!cancel}" value="Cancel" id="Opportunityform_Cancel"/>
+                     <!-- Fim Botões Opportunityform -->
+             	</apex:pageBlockButtons>
+                                         
+                <apex:tabPanel switchType="client" selectedTab="informationbasic" id="theTabPanel">
+                    <apex:tab label="Informações Básicas" name="informationbasic" id="tabOne">
+                        <!-- Fields Opportunityform -->
+                        <apex:pageBlockSection >
+                            <apex:inputField value="{!Opportunity.Name}" />
+                            <!-- Fim Fields Opportunityform -->
+                        </apex:pageBlockSection>
+                    </apex:tab>
+            	</apex:tabPanel>
+            
+                 
+                
+        </apex:pageBlock>
+        </apex:form>
+    	
+        <c:Opportunity_ProductsItens_vfc abc="{!Opportunity.Id}" ></c:Opportunity_ProductsItens_vfc>
+             
+   
+</apex:page>

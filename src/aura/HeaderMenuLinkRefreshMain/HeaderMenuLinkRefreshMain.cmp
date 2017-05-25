@@ -1,0 +1,6 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<div style="margin-left:200px;">
+        <a href="#page1" id="page1" onclick="{!c.RefreshPage}">Page1</a><br/>
+        <a href="#page2" id="page2" onclick="{!c.RefreshPage}">Page2</a>
+    </div>
+</aura:component>

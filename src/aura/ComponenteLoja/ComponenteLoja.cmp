@@ -1,0 +1,77 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="ComponenteLojaController" >
+   
+    <ltng:require styles="{!join(',', $Resource.libraryfrontend + '/bootstrap.css')}" scripts="{!join(',',$Resource.libraryfrontend + '/jquery.js',$Resource.libraryfrontend + '/bootstrap.js')}"/> 
+    
+    <aura:attribute name="isHaveLoja" default="true" type="Boolean" />
+    <aura:attribute name="ContryId" type="String" default="" access="global"/>
+    <aura:attribute name="BrandId" type="String" default="" access="global"/>
+    <aura:attribute name="RegionId" type="String" default="" access="global"/>
+    <aura:attribute name="ListRegions" type="List" access="global"/>
+    <aura:attribute name="ListStores" type="List" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!RegionId}" action="{!c.ChangeRegion}"/>
+    
+    <div class="container">
+        
+        <lightning:spinner variant="brand" aura:id="spinnerLoad" size="large"/>
+    
+        <div class="page-header">
+          <h1>Regiões</h1>
+        </div>
+        
+         <select name="selectRegionlithning" label="Selecione a Região" class="form-control" value="{!v.RegionId}" onchange="{!c.ChangeRegion}">
+             <option value=""></option>
+             <aura:iteration items="{!v.ListRegions}" var="region">
+                 <option value="{!region.key}">{!region.value}</option>
+            </aura:iteration>
+        </select>
+        
+        <br/>
+        
+        <aura:renderIf isTrue="{!v.ListStores.length>0}">
+             <!--<div class="list-group col-md-4">
+                 <aura:iteration items="{!v.ListStores}" var="store">
+                      <button href="#" class="list-group-item" value="{!store.Id}" onclick="{!c.ShowLoja}">{!store.Name}</button>
+                 </aura:iteration>
+             </div>-->
+            
+            <div class="panel-group" role="tablist" aria-multiselectable="true">
+              <aura:iteration items="{!v.ListStores}" var="store">
+                   <div class="panel panel-default">
+                    <div class="panel-heading itemAccordion" value="{!store.Id}" onclick="{!c.ShowLoja}" role="tab">
+                      <h4 class="panel-title" >
+                        <a role="button" value="{!store.Id}" aria-expanded="true"  style="display:block;padding:0px;" aria-controls="collapseOne">
+                          {!store.Name}
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="{!store.Id}" class="loja" role="tabpanel" style="display:none;" aria-labelledby="{!store.Id}">
+                      <div class="panel-body">
+                         <ui:outputRichText value="{!store.ImgLogo__c}"/>                      
+                      </div>
+                    </div>
+                  </div>
+               </aura:iteration>
+            </div>
+            
+            
+            <!--<div class="col-md-4" id="lojas">
+                <aura:iteration items="{!v.ListStores}" var="store">
+                   <div class="panel panel-default" style="display:none;" id="{!store.Id}" >
+                        <div class="panel-heading">
+                             <h4>{!store.Name}</h4>
+                        </div>    
+                        <div class="panel-body">
+                            <ui:outputRichText value="{!store.ImgLogo__c}"/>
+                        </div>
+                    </div>
+               </aura:iteration>
+            </div> -->
+            <aura:set attribute="else">
+              Não possui Lojas nesta região.
+            </aura:set>
+       </aura:renderIf> 
+        </div>
+
+</aura:component>

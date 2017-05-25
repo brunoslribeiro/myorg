@@ -1,0 +1,35 @@
+<apex:page standardController="Account" extensions="PesquisarContas_crl">
+    <apex:pageMessages />
+    	
+    
+    <apex:pageBlock title="Accounts List">
+        
+        <apex:pageBlockButtons location="top" rendered="{!pesquisarContasVm.blnBlockSearchTable}" >
+          <apex:outputPanel id="myButtons">
+           <apex:form >
+                <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>
+                <apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>        
+                <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="myPanel,myButtons"/>
+                <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons"/>        
+           </apex:form>
+          </apex:outputPanel>
+        </apex:pageBlockButtons>
+        
+        <apex:form style="margin:10px;" >
+            <label for="Nome" > Nome </label>
+            <apex:inputText value="{!pesquisarContasVm.strNome}" id="Nome"/>
+            <apex:commandButton value="Enviar" action="{!PesquisarNome}"/>
+        </apex:form>
+        
+        <apex:pageBlockSection title="Numero de Contas Encontradas (Total: {!pesquisarContasVm.total_size})" rendered="{!pesquisarContasVm.blnBlockSearchTable}" collapsible="false">
+             <apex:outputPanel id="myPanel">
+            <apex:pageBlockTable value="{!pesquisarContasVm.Contas}" id="pageBlockTableSearch" var="c" >
+               <apex:column value="{!c.Id}"/>
+               <apex:column value="{!c.Name}"/>
+               <apex:facet name="footer">Showing Page # {!pageNumber} of {!totalPages}</apex:facet>
+            </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+           
+        </apex:pageBlock>
+</apex:page>

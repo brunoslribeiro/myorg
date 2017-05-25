@@ -1,0 +1,11 @@
+<apex:page controller="TestController">
+   <script>
+       Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.TestController.setMessage}',
+            {'apexType':'thenamespace.TestController.MyClass', 'myString':'Lumos!'}, 
+            handleResult
+        );
+   </script>    
+    
+    
+</apex:page>

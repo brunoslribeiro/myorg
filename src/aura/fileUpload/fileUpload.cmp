@@ -1,0 +1,23 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="FileController" access="global" >
+	
+    <ltng:require styles="{!join(',', $Resource.libraryfrontend + '/bootstrap.css')}" scripts="{!join(',',$Resource.libraryfrontend + '/jquery.js',$Resource.libraryfrontend + '/bootstrap.js')}"/>  
+    
+    <aura:attribute name="parentId" type="Id" default="a0V41000001LQoL"/>
+    
+    <aura:attribute name="uploadPercent" type="String" default="0"/>
+    
+    <aura:handler event="aura:waiting" action="{!c.waiting}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>
+    
+    <div class="container">
+        <input type="file" class="file" aura:id="file" />
+        <button onclick="{!c.save}">Upload</button>
+         <div aura:id="uploading" class="notUploading" style="width:100%;">
+             <div class="progress">
+                Upload...
+             </div>
+    	</div>
+    </div>
+    
+    
+</aura:component>

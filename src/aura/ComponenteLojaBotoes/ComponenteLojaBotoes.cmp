@@ -1,0 +1,16 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<h1>Componente2</h1>
+		      
+      <aura:attribute name="TemLoja" type="Boolean"/>
+    
+      <aura:renderIf isTrue="{!v.TemLoja}">
+           <p><ui:button class="slds-button slds-button--brand uiButton forceCommunityAskCommunity" label="PopUp Loja" /></p>
+    	   <p><ui:button class="slds-button slds-button--brand uiButton forceCommunityAskCommunity" label="Email"/></p>
+          <p><ui:button class="slds-button slds-button--brand uiButton forceCommunityAskCommunity" label="Rede Social"/></p>
+        <aura:set attribute="else">
+          Não possui Lojas
+        </aura:set>
+      </aura:renderIf> 
+ 
+    
+</aura:component>

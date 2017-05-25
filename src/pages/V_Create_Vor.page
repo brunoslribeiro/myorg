@@ -1,0 +1,32 @@
+<apex:page standardController="ObjetoPai__c" extensions="V_Create_Vor_ctr" tabStyle="ObjetoPai__c" >
+
+    <apex:form id="ObjetoPai_c_form">
+        <apex:pageBlock title="Informações Objeto Vor" mode="edit">
+            	 <apex:messages styleClass="errorMsg"/>
+            
+                <apex:pageBlockButtons >
+                    <!-- Botões ObjetoPai_c_form -->
+                        <apex:commandButton action="{!save}" value="Save" id="ObjetoPai_c_form_SaveButton"/>
+                        <apex:commandButton action="{!cancel}" value="Cancel" id="ObjetoPai_c_form_Cancel"/>
+                    <!-- Fim Botões ObjetoPai_c_form -->
+                </apex:pageBlockButtons>
+                
+                <apex:tabPanel switchType="client" selectedTab="name1" id="theTabPanel">
+                    <apex:tab label="Basic Information" name="name1" id="tabOne">
+                        <!-- Fields ObjetoPai_c_form -->
+                        <apex:pageBlockSection >
+                            <apex:inputField value="{!ObjetoPai__c.Name}" />
+                            <apex:inputField value="{!ObjetoPai__c.ObjAr__c}" />
+                            <!-- Fim Fields ObjetoPai_c_form -->
+                        </apex:pageBlockSection>
+                    </apex:tab>
+            	</apex:tabPanel>
+                
+        </apex:pageBlock>
+         
+        <apex:pageBlock title="Informações do Objeto Var" id="ComponenteVarList" rendered="true">
+         	aaaaa
+         </apex:pageBlock>
+             
+   </apex:form>
+</apex:page>

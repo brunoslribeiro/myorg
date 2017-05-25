@@ -1,0 +1,54 @@
+<apex:component controller="Opportunity_ProductItens_ctrl" allowDML="true">
+     <apex:attribute assignTo="{!opportunityId}" type="String" name="abc"  description="opportunityId"  required="true"/>
+    
+     <apex:form >
+        
+        <apex:pageBlock title="Criação/Edição de Itens da Oportunidade {!opportunityId}">
+            
+             <apex:actionFunction action="{!SalvarItemOportunidade}" name="SalvarItemOportunidade" rerender="ListItemOportunidade">
+        	 </apex:actionFunction>
+         	<apex:outputPanel id="FormItemOportunidade">
+                <apex:pageBlockSection >
+                        <apex:pageBlockSectionItem rendered="{!$ObjectType.OpportunityLineItem.fields.Name.accessible}">
+                            <apex:outputLabel value="{!$ObjectType.OpportunityLineItem.fields.Name.Label}"/>
+                            <apex:inputText value="{!VM.ItemAtual.Name}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem rendered="{!$ObjectType.OpportunityLineItem.fields.Quantity.accessible}">
+                            <apex:outputLabel value="{!$ObjectType.OpportunityLineItem.fields.Quantity.Label}"/>
+                            <apex:inputText value="{!VM.ItemAtual.Quantity}" />
+                        </apex:pageBlockSectionItem>                   
+                </apex:pageBlockSection>
+            </apex:outputPanel>	
+            
+            <apex:pageBlockButtons >
+                <input type="button" value="New" class="btn" onclick="console.log('New');"/>
+                <input type="button" value="Clear" class="btn" onclick="console.log('Clear');"/>
+                <input type="button" value="Save" class="btn" onclick="SalvarItemOportunidade();"/>
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock> 
+         
+       <apex:pageBlock >
+            
+            <apex:actionFunction action="{!EditarItemOportunidade}" name="EditarItemOportunidade" rerender="FormItemOportunidade">
+                <apex:param name="firstParam" assignTo="{!VM.IdItemAtual}" value="" />
+            </apex:actionFunction>
+            
+           <apex:outputPanel id="ListItemOportunidade">
+                <apex:pageBlockTable value="{!VM.Products}" var="item">
+                     <apex:column >
+                            <input type="button" value="Editar" class="btn" onclick="EditarItemOportunidade('{!item.Id}')"/>
+                            <input type="button" value="Deletar" class="btn" onclick="console.log('{!item.Id}');"/>
+                    </apex:column>
+                    <apex:column value="{!item.Name}"/>   
+                    <apex:column value="{!item.Quantity}"/>  
+                   
+                </apex:pageBlockTable> 
+           	</apex:outputPanel>
+       </apex:pageBlock>    
+         
+    </apex:form> 
+   
+         
+    
+</apex:component>

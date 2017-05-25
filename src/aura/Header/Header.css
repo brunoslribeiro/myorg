@@ -1,0 +1,35 @@
+.THIS {
+    background-color:#DF1115;
+    width:100%;			
+    margin:0px;
+    left:0;
+    top:0;
+    position:relative;
+    height:180px;
+}	
+
+.THIS .imglogo {
+    height: 35px;
+    width: auto;
+    vertical-align:middle;	
+    margin-top:20px;			
+}
+
+.THIS button{
+    background-color:token(colorBrand);
+}
+
+.THIS a{
+    color: token(colorTextLink);
+    font-family:token(fontFamily);
+}
+
+.THIS .menu{
+    margin-top:20px;
+    margin-left:30px;
+}
+
+.THIS.linha-vertical {
+    height: 500px;/*Altura da linha*/
+    border-left: 2px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+}
